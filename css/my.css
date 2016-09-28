@@ -1,12 +1,12 @@
 .header {
-    background-color: #D3ECF5;
-    height: 200px;
+    background-color: 	#FFD700;
+    height: 500px;
 }
 .main {
-    background-color: #EDD3F5;
+    background-color: #FF00AA;
 }
 .sidebar {
-    background-color: #DBF5D3;
+    background-color: 	#DEB887;
 }
 .footer {
     background-color:  #D3ECF5;
