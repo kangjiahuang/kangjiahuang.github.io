@@ -1,14 +1,17 @@
 .header {
     background-color: 	#FFD700;
     height: 500px;
+    text-align: center;
 }
 .main {
-    background-color: #FF00AA;
+    background-color: #DEB887;
+    margin: 20px;
 }
 .sidebar {
     background-color: 	#DEB887;
+    margin: 20px;
 }
 .footer {
     background-color:  #D3ECF5;
-    height: 200px;
+    height: 20px;
 }
