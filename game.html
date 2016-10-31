@@ -1,237 +1,135 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>my first page</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/my.css">
+	<title>my first page</title>
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/my.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/test.css" />
+	<script src="js/avalon.min.js"></script>
 
+	<script>
+        function print1()
+        {  alert("如何才算赢：使拼板全部变成蓝色.");}
+    </script>
 </head>
 
 <style>
-    img.aa {
-        width: 100%;
-    }
+	img.aa {
+		width: 100%;
+	}
 </style>
+<br>
+<br>
+<br><br>
+<br>
+<br><br>
+<br>
+<br>
 
-<body>
-    <div class="row">
-    <nav class="navbar navbar-dark bg-inverse navbar-fixed-top bg-faded">
-        <a class="navbar-brand" href="./index.html">Navbar</a>
-        <ul class="nav navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./travel.html">travel</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="./game.html">game</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./about.html">About</a>
-            </li>
-        </ul>
-        <div class="dropdown open pull-xs-right">
-            <button class="btn btn-secondary btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top bg-faded">
+		<a class="navbar-brand" href="#">Navbar</a>
+		<ul class="nav navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="./travel.html">travel</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="./game.html">game</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="./about.html">About</a>
+			</li>
+		</ul>
+		<div class="dropdown open pull-xs-right">
+			<button class="btn btn-secondary btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false">
     Dropdown button
   </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="./travel.html">travel</a>
-                <a class="dropdown-item active" href="./game.html">game</a>
-                <a class="dropdown-item" href="./about.html">aboutme</a>
-            </div>
-        </div>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item active" href="./travel.html">travel</a>
+				<a class="dropdown-item" href="./game.html">game</a>
+				<a class="dropdown-item" href="./about.html">aboutme</a>
+			</div>
+		</div>
 
-    </nav>
-    </div>
-    
+	</nav>
 
-
-    <div class="container">
-
-
-
-   <canvas id="myCanvas" width="480" height="320"></canvas>
-
-<script>
-    var canvas = document.getElementById("myCanvas");
-    var ctx = canvas.getContext("2d");
-    var ballRadius = 10;
-    var x = canvas.width/2;
-    var y = canvas.height-30;
-    var dx = 2;
-    var dy = -2;
-    var paddleHeight = 10;
-    var paddleWidth = 75;
-    var paddleX = (canvas.width-paddleWidth)/2;
-    var rightPressed = false;
-    var leftPressed = false;
-    var brickRowCount = 5;
-    var brickColumnCount = 3;
-    var brickWidth = 75;
-    var brickHeight = 20;
-    var brickPadding = 10;
-    var brickOffsetTop = 30;
-    var brickOffsetLeft = 30;
-    var score = 0;
-    var lives = 3;
-
-    var bricks = [];
-    for(c=0; c<brickColumnCount; c++) {
-        bricks[c] = [];
-        for(r=0; r<brickRowCount; r++) {
-            bricks[c][r] = { x: 0, y: 0, status: 1 };
-        }
-    }
-
-    document.addEventListener("keydown", keyDownHandler, false);
-    document.addEventListener("keyup", keyUpHandler, false);
-    document.addEventListener("mousemove", mouseMoveHandler, false);
-
-    function keyDownHandler(e) {
-        if(e.keyCode == 39) {
-            rightPressed = true;
-        }
-        else if(e.keyCode == 37) {
-            leftPressed = true;
-        }
-    }
-    function keyUpHandler(e) {
-        if(e.keyCode == 39) {
-            rightPressed = false;
-        }
-        else if(e.keyCode == 37) {
-            leftPressed = false;
-        }
-    }
-    function mouseMoveHandler(e) {
-        var relativeX = e.clientX - canvas.offsetLeft;
-        if(relativeX > 0 && relativeX < canvas.width) {
-            paddleX = relativeX - paddleWidth/2;
-        }
-    }
-    function collisionDetection() {
-        for(c=0; c<brickColumnCount; c++) {
-            for(r=0; r<brickRowCount; r++) {
-                var b = bricks[c][r];
-                if(b.status == 1) {
-                    if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
-                        dy = -dy;
-                        b.status = 0;
-                        score++;
-                        if(score == brickRowCount*brickColumnCount) {
-                            alert("YOU WIN, CONGRATS!");
-                            document.location.reload();
-                        }
+<body ms-controller="model">
+	<h1>翻转拼图游戏</h1>
+	<button onclick="print1()">玩法说明</button> 棋盘大小：{{sz}} x {{sz}}
+	<div id="board">
+		<div class="tile" ms-class="on:el==1" ms-class-1="clear:$index%sz==0" ms-repeat="grid" ms-click="tile_click"></div>
+	</div>
+	<script>
+        var vm = avalon.define('model', function(vm) {
+            vm.sz = 0;//设置大小
+            vm.grid = [];//设定数组
+            vm.tile_click = function() {//设置点击函数
+                var col = $(this).index() % vm.sz;//知道第几列
+                var row = parseInt($(this).index() / vm.sz);//获取行
+                var dx = [0, 0, 1, 0, -1];//用于找上下左右格子
+                var dy = [0, 1, 0, -1, 0];//用于找上下左右格子
+                var buf;
+                var k=0;
+                for(var d = 0; d < 5; ++d) {
+                    col += dx[d]; row += dy[d];//五个位置都找一遍
+                    if(col >=0 && col < vm.sz && row >=0 && row < vm.sz) {
+                        //设置边界
+                        buf = 1 - vm.grid[row*vm.sz+col];
+                       // buf暂时存储数值
+                        vm.grid.splice(row*vm.sz+col, 1, buf);
+                        //替换进入
                     }
+                    col -= dx[d]; row -= dy[d];//再回归到中间位置
+                }
+                for(var j=0; j < vm.sz*vm.sz;j++)
+                {
+                    if(vm.grid[j]==1)k++;
+                    if(k==(vm.sz*vm.sz))
+                    {alert("恭喜胜利"); vm.sz++;}
                 }
             }
+        });
+        vm.$watch('sz', function(val) {
+            var i, j, row;
+            val = parseInt(val) || 4;
+            vm.grid.clear();
+            for(i = 0; i < val * val; ++i) vm.grid.push(0);
+        });
+        vm.sz = 3;
+        function up(){
+            vm.sz++;
+            if(vm.sz>15){alert("别乱点");vm.sz=14;}
         }
-    }
-
-    function drawBall() {
-        ctx.beginPath();
-        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-        ctx.fillStyle = "#0095DD";
-        ctx.fill();
-        ctx.closePath();
-    }
-    function drawPaddle() {
-        ctx.beginPath();
-        ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-        ctx.fillStyle = "#0095DD";
-        ctx.fill();
-        ctx.closePath();
-    }
-    function drawBricks() {
-        for(c=0; c<brickColumnCount; c++) {
-            for(r=0; r<brickRowCount; r++) {
-                if(bricks[c][r].status == 1) {
-                    var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
-                    var brickY = (c*(brickHeight+brickPadding))+brickOffsetTop;
-                    bricks[c][r].x = brickX;
-                    bricks[c][r].y = brickY;
-                    ctx.beginPath();
-                    ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                    ctx.fillStyle = "#0095DD";
-                    ctx.fill();
-                    ctx.closePath();
-                }
-            }
-        }
-    }
-    function drawScore() {
-        ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
-        ctx.fillText("Score: "+score, 8, 20);
-    }
-    function drawLives() {
-        ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
-        ctx.fillText("Lives: "+lives, canvas.width-65, 20);
-    }
-
-    function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawBricks();
-        drawBall();
-        drawPaddle();
-        drawScore();
-        drawLives();
-        collisionDetection();
-
-        if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-            dx = -dx;
-        }
-        if(y + dy < ballRadius) {
-            dy = -dy;
-        }
-        else if(y + dy > canvas.height-ballRadius) {
-            if(x > paddleX && x < paddleX + paddleWidth) {
-                dy = -dy;
-            }
-            else {
-                lives--;
-                if(!lives) {
-                    alert("GAME OVER");
-                    document.location.reload();
-                }
-                else {
-                    x = canvas.width/2;
-                    y = canvas.height-30;
-                    dx = 3;
-                    dy = -3;
-                    paddleX = (canvas.width-paddleWidth)/2;
-                }
-            }
+        function down(){
+            vm.sz--;
+            if(vm.sz==1){alert("不能再降了");vm.sz=2;}
         }
 
-        if(rightPressed && paddleX < canvas.width-paddleWidth) {
-            paddleX += 7;
-        }
-        else if(leftPressed && paddleX > 0) {
-            paddleX -= 7;
-        }
+    </script>
+	<button onclick="up()">提高难度</button>
+	<button onclick="down()">降低难度</button>
 
-        x += dx;
-        y += dy;
-        requestAnimationFrame(draw);
-    }
 
-    draw();
-</script>
-    <div class="footer">
-        <p>我就是我 不一样的烟火</p>
 
-    </div>
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/tether.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/js001.js"></script>
+
+	<div class="footer">
+		<p>我就是我 不一样的烟火</p>
+
+	</div>
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/tether.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/js001.js"></script>
+	<script src="./js/js006.js"></script>
+
 </body>
 
 </html>
