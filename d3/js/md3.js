@@ -18,14 +18,21 @@ c2.attr('cx',400).attr('cy',100).attr('r',50).attr('stroke','black').attr('strok
 var p1 = svgctrl.append('polygon');
 p1.attr('points','250,200 400,200 325,230 ').attr('stroke','red').attr('stroke-width',3).attr('fill','#FFFFFF');
 
+
+
+
 var $d=$('#kk');
 $d.bind('click', function() {
 
         $('circle').eq(3).attr('cx',150);
          $('circle').eq(4).attr('cx',500);
     })
+
+
+
 $('button').bind('click',function(){
     $('circle').eq(3).attr('cx',250);
          $('circle').eq(4).attr('cx',400);
+         $("#x").animate({left:'+=100px'});
 }
 )
