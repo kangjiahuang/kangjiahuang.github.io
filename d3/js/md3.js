@@ -20,14 +20,15 @@ p1.attr('points', '250,200 400,200 325,230 ').attr('stroke', 'red').attr('stroke
 
 
 
-var color = new Array('pink','green','blue','yellow');
 var $d = $('#kk');
 $d.bind('click', function () {
 
     $('circle').eq(3).attr('cx', 150);
     $('circle').eq(4).attr('cx', 500);
-    var k = Math.floor(Math.random()*4);
-    $('polygon').attr('fill', color[k]);
+    var i = (Math.floor(Math.random()*256)).toString(16);
+    var j = (Math.floor(Math.random()*256)).toString(16);
+    var k = (Math.floor(Math.random()*256)).toString(16);
+    $('polygon').attr('fill', "#"+i+j+k);
 
 })
 
