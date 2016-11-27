@@ -3,7 +3,7 @@ var fs = require('fs');
 
 console.log(__dirname);
 
-var filename = __dirname + '\\web\\index.html';
+var filename = __dirname + '\\index.html';
 console.log(filename);
 
 // 讀取檔案
