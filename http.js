@@ -14,6 +14,14 @@ var server = http.createServer(function (req, res) {
     // req 是本地端請求的訊息
     // res 是主機回傳到本地端的訊息
 
+    fs.readFile(filename, 'utf8',function (err,content){
+        if (err){
+            res.writeHead(404,{'content-type':'text/html'});
+            res.end();
+            return;
+        }
+    })
+
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write(content);
     res.end();
