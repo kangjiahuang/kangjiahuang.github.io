@@ -1,0 +1,46 @@
+.header {
+    background-color: #fff;
+    height: 500px;
+    text-align: center;
+}
+
+.main {
+    background-color: #fff;
+    margin: 20px;
+}
+
+.sidebar {
+    background-color: #fff;
+    margin: 20px;
+}
+
+.footer {
+    background-color: #D3ECF5;
+    height: 20px;
+    text-align: right;
+}
+
+.row {
+    padding-bottom: 20px;
+}
+
+.row2 {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.carousel-item active {
+    height: 500px;
+}
+
+.carousel-item {
+    height: 500px;
+}
+
+.zz {
+    height: 216px;
+}
+
+.duanluo {
+    border: 1px solid #ddd;
+}
