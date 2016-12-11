@@ -95,4 +95,4 @@ var server = http.createServer(function (req, res) {
 
 // 監聽 12345 port
 server.listen(12345);
-console.log('Server running at http://127.0.0.1:12345/');
+console.log('Server running at http://10.10.60.118:12345/');
